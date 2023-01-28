@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: #333;
+    font-family: 'Courier New', Courier, monospace;
+    .App {
+        Nav {
+            display: flex;
+            flex-flow: wrap;
+            font-size: 1.3rem;
+            background-color: #777;
+            padding: 1rem 5rem;
+            a {
+                color: orange;
+                padding: 0 1rem;
+                text-decoration: none;
+            }
+        }
+    }
+}
