@@ -1,0 +1,7 @@
+@url = http://localhost:3013
+
+### get docs
+{{url}}
+
+### get books
+{{url}}/books
