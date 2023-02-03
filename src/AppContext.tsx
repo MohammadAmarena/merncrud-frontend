@@ -10,7 +10,7 @@ interface IAppProvider {
     children: React.ReactNode;
 }
 
-const backendUrl = 'http://localhost:3013'
+const backendUrl = import.meta.env.VITE_BACKEND_URL
 
 export const AppContext = createContext<IAppContext>({} as IAppContext)
 
@@ -22,8 +22,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
             setBooks((await axios.get(`${backendUrl}/books`)).data)
         })()
     },[])
-
-    console.log(books);
 
     return (
         <AppContext.Provider value={{ books }}>
