@@ -1,25 +1,163 @@
-import { useContext } from "react"
-import { AppContext } from '../AppContext.js'
-import { IBook } from '../interfaces.js'
+import { useContext } from 'react';
+import { AppContext } from '../AppContext';
+import { Helmet } from 'react-helmet';
 
 export const Books = () => {
-    const { books } = useContext(AppContext)
-    return (
-        <>
-            <div className="books">
-                {books.map((book: IBook) => {
-                    return (
-                        <div className="book">
-                            <img src={book.imageUrl} alt="" />
-                            <div className="bookBody">
-                                <h3 className="title">{book.title}</h3>
-                                <p className="description">{book.description}</p>
-                                <div className="lang">{book.language.charAt(0).toUpperCase() + book.language.slice(1)}</div>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
-        </>
-    )
-}
+	const {
+		appTitle,
+		books,
+		adminIsLoggedIn,
+		handleDeleteBook,
+		handleBookFieldChange,
+		handleEditBook,
+		handleCancelEditBook,
+		handleSaveEditBook,
+	} = useContext(AppContext);
+
+	return (
+		<div className="pageBooks">
+			<Helmet>
+				<title>{appTitle} - Books</title>
+			</Helmet>
+			{books.length > 0 && <p>There are {books.length} books:</p>}
+
+			{adminIsLoggedIn && false && (
+				<div className="addBookArea">
+					<button>Add Book</button>
+				</div>
+			)}
+			<div className="books">
+				{books.map((book) => {
+					return (
+						<div className="book" key={book._id}>
+							<div className="imageWrapper">
+								<img src={book.imageUrl} />
+							</div>
+							<div className="info">
+								{!book.isBeingEdited ? (
+									<div className="showDataArea">
+										<div className="title">
+											<a href={book.buyUrl}>
+												{book.title}
+											</a>
+										</div>
+										<div className="description">
+											{book.description}
+										</div>
+										<div className="language">
+											{book.languageText}
+										</div>
+										{adminIsLoggedIn && (
+											<div className="buttonArea">
+												<button
+													type="button"
+													onClick={() =>
+														handleDeleteBook(book)
+													}
+												>
+													Delete
+												</button>
+												<button
+													type="button"
+													onClick={() =>
+														handleEditBook(book)
+													}
+												>
+													Edit
+												</button>
+											</div>
+										)}
+									</div>
+								) : (
+									<div className="editArea">
+										<form>
+											<div className="row">
+												<label>Title</label>
+												<div className="control">
+													<input
+														value={
+															book
+																.originalEditFields
+																.title
+														}
+														onChange={(e) =>
+															handleBookFieldChange(
+																'title',
+																book,
+																e.target.value
+															)
+														}
+														type="text"
+													/>
+												</div>
+											</div>
+											<div className="row">
+												<label>Description</label>
+												<div className="control">
+													<textarea
+														value={
+															book
+																.originalEditFields
+																.description
+														}
+														onChange={(e) =>
+															handleBookFieldChange(
+																'description',
+																book,
+																e.target.value
+															)
+														}
+													/>
+												</div>
+											</div>
+											<div className="row">
+												<label>Language</label>
+												<div className="control">
+													<input
+														value={
+															book
+																.originalEditFields
+																.language
+														}
+														onChange={(e) =>
+															handleBookFieldChange(
+																'language',
+																book,
+																e.target.value
+															)
+														}
+														type="text"
+													/>
+												</div>
+											</div>
+											<div className="editFormButtons">
+												<button
+													type="button"
+													onClick={() =>
+														handleCancelEditBook(
+															book
+														)
+													}
+												>
+													Cancel
+												</button>
+												<button
+													type="button"
+													onClick={() =>
+														handleSaveEditBook(book)
+													}
+												>
+													Save
+												</button>
+											</div>
+										</form>
+									</div>
+								)}
+							</div>
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	);
+};

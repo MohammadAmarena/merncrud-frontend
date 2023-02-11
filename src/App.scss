@@ -1,46 +1,181 @@
-* {
-    box-sizing: border-box;
-}
+$header_color: rgb(194, 164, 107);
+$flashcard_background_front: #222;
+$flashcard_background_back: #111;
+$flashcard_width: 35rem;
+$row_width_full: 24.5rem;
+$row_width_short: 8rem;
+
 body {
-    background-color: #333;
-    font-family: 'Courier New', Courier, monospace;
-    .App {
-        Nav {
-            display: flex;
-            flex-flow: wrap;
-            font-size: 1.3rem;
-            background-color: #777;
-            padding: 1rem 5rem;
-            a {
-                color: orange;
-                padding: 0 1rem;
-                text-decoration: none;
-            }
-        }
-    }
-    .books {
-        .book {
-            display: flex;
-            gap: 1.5rem;
-            margin: 1.5rem;
-            background-color: #111;
-            max-width: 60%;
-            img {
-                min-width: 220px;
-                height: 250px;
-            }
-            .bookBody {
-                color: gray;
-                .title {
-                    color: rgb(179, 179, 125);
-                }
-                .description {
-                    
-                }
-                .lang {
-                    color: orange;
-                }
-            }
-        }
-    }
+	background-color: #333;
+	color: #ccc;
+	font-family: sans-serif;
+	padding: 0 1rem;
+	animation: fadein .5s ease-in;
+
+	@keyframes fadein {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+
+
+	h1 {
+		color: rgb(209, 168, 85);
+	}
+
+	nav {
+		background-color: #222;
+		padding: .5rem;
+
+		a {
+			color: #aaa;
+			text-decoration: none;
+			margin-right: 1rem;
+		}
+
+		a.active {
+			color: rgb(211, 211, 110);
+		}
+	}
+
+	.pageBooks {
+		p {
+			font-size: 1.4rem;
+
+			strong {
+				color: $header_color;
+			}
+		}
+
+
+		// button {
+		// 	box-shadow: inset 0px 0px 14px -3px #f2fadc;
+		// 	background: linear-gradient(to bottom, #dbe6c4 5%, #9ba892 100%);
+		// 	background-color: #dbe6c4;
+		// 	border-radius: 6px;
+		// 	border: 1px solid #b2b8ad;
+		// 	display: inline-block;
+		// 	cursor: pointer;
+		// 	color: #3d3f3c;
+		// 	font-family: Arial;
+		// 	font-size: 15px;
+		// 	font-weight: bold;
+		// 	padding: 6px 24px;
+		// 	text-decoration: none;
+		// 	text-shadow: 0px 1px 0px #ced9bf;
+		// }
+
+		// button:hover {
+		// 	background: linear-gradient(to bottom, #9ba892 5%, #dbe6c4 100%);
+		// 	background-color: #9ba892;
+		// }
+
+		// button:active {
+		// 	position: relative;
+		// 	top: 1px;
+		// }
+
+		.addBookArea {
+			margin-bottom: 1rem;
+		}
+
+		.books {
+			.book {
+				background-color: #222;
+				margin-bottom: 1rem;
+				padding: 1.5rem 1.5rem 2.5rem 1.5rem;
+				display: flex;
+				gap: 1rem;
+				align-items: start;
+				width: 50rem;
+
+				img {
+					width: 7rem;
+					height: 11rem;
+					animation: fadeinBook 2s ease-in;
+				}
+
+				.info {
+					.title {
+						font-size: 1.3rem;
+						margin-bottom: .5rem;
+					}
+
+					a {
+						color: rgb(209, 161, 71);
+					}
+
+					.description {
+						font-style: italic;
+						margin-bottom: .5rem;
+					}
+
+					.language {
+						color: rgb(212, 212, 140);
+					}
+
+					.buttonArea {
+						margin-top: 1rem;
+
+						button {
+							margin-right: .5rem;
+						}
+					}
+
+					.editArea {
+						background: $flashcard_background_front;
+						max-width: $flashcard_width - 1.6rem;
+						padding: 1.2rem .7rem .9rem .5rem;
+
+						.editFormButtons {
+							margin-top: 1rem;
+							width: 41.7rem;
+							button {
+								margin-right: .5rem;
+							}
+							text-align: right;
+						}
+
+						.row {
+							display: flex;
+							gap: .5rem;
+							margin-bottom: .3rem;
+
+							label {
+								&::after {
+									content: ': ';
+								}
+
+								width: 5.3rem;
+							}
+
+							div.control {
+								width: $row_width_full;
+
+								input {
+									width: 35rem;
+									font-size: .9rem;
+								}
+								textarea {
+									width: 35rem;
+									height: 4rem;
+									font-size: .9rem;
+								}
+							}
+						}
+
+
+					}
+
+
+				}
+			}
+		}
+	}
+
+
 }
